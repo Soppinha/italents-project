@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMC</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="/imc/script.js"></script>
+</head>
+
+<body>
+    <form class="inicial" onsubmit="return validarInputs(event)">
+        <h1>Calcule seu IMC</h1>
+
+        <div class="input">
+            <label id="lb" for="inp">Peso (em quilogramas): </label>
+            <input id="peso" class="inp p" type="text" placeholder="Digite seu peso" value=" ">
+            <span id="errorP" class="error"></span>
+        </div>
+        <div class="input">
+            <label id="lb" for="inp">Altura (em metros ou centímetros):</label>
+            <input id="altura" class="inp a" type="text" placeholder="Digite sua altura" value=" ">
+            <span id="errorA" class="error"></span>
+        </div>
+
+        <button id="btn-cal" class="btn" type="submit">Calcular</button>
+    </form>
+
+    <div class="part-loading" id="pt-lod" style="display: none;">
+        <p>Carregando</p>
+        <div class="loading" id="lod">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+
+    <div class="resultado" style="display: none;">
+        <img src="" alt="" id="icone">
+        <p id="textoImc"></p>
+        <p id="textoResult"></p>
+        <button type="button" onclick="voltarAoInicio()">Refaser</button>
+    </div>
+
+</body>
+
+<script>
+    // Limpa os valores das inputs quando a página é carregada
+    window.onload = limparValorInput()
+
+
+    // Função para testar mais de um hipótese
+    function testar() {
+        const testCases = [
+            { peso: 45, altura: "1.63" }, // Peso abaixo do normal
+            { peso: 68, altura: "1.75" }, // Peso normal
+            { peso: 80, altura: "1.75" }, // Sobrepeso
+            { peso: 95, altura: "1.75" }, // Obesidade
+            { peso: 70, altura: "175" }, // Altura em centímetros, peso normal
+        ];
+
+        testCases.forEach((test) => {
+            console.log("Teste com Peso:", test.peso, "Altura:", test.altura);
+            calcularImc(test.peso, test.altura);
+        });
+    }
+
+    testar();
+
+</script>
+
+</html>
